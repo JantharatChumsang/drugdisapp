@@ -44,7 +44,7 @@ from rdkit.Chem import AllChem
 from rdkit import Chem
 from rdkit.Avalon import pyAvalonTools
 from rdkit import Chem, DataStructs
-# from rdkit.Chem.Draw import rdMolDraw2D
+from rdkit.Chem.Draw import rdMolDraw2D
 # from rdkit.Chem.Draw import SimilarityMaps, IPythonConsole
 from chembl_webresource_client.new_client import new_client
 from rdkit import rdBase
@@ -189,11 +189,11 @@ if selected =="Check your SMILES molecule":
                 model4 = joblib.load('active-inactive_predictor3.joblib')
                 model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
-#                 def draw_compound(canonical_smiles):
-#                     pic = Chem.MolFromSmiles(canonical_smiles)
-#                     weight = Descriptors.MolWt(pic)
-#                     return Draw.MolToImage(pic)
-#                 picim = draw_compound(canonical_smiles)
+                def draw_compound(canonical_smiles):
+                    pic = Chem.MolFromSmiles(canonical_smiles)
+                    weight = Descriptors.MolWt(pic)
+                    return Draw.MolToImage(pic)
+                picim = draw_compound(canonical_smiles)
 
                 col1, col2 = st.columns(2)
                 col1.write('')
