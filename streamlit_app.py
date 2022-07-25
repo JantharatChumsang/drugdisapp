@@ -5,7 +5,7 @@ import streamlit as st
 from streamlit_option_menu import option_menu
 from streamlit_lottie import st_lottie
 
-#import codecs
+import codecs
 # import pickle
 import joblib
 import requests
@@ -38,13 +38,12 @@ import numpy as np
 
 #------------------------------------------------#
 
-from rdkit.Chem import Descriptors, Lipinski
+from rdkit.Chem import Descriptors, Lipinski, Draw
 from rdkit.ML.Descriptors import MoleculeDescriptors
 from rdkit.Chem import AllChem
 from rdkit import Chem
 from rdkit.Avalon import pyAvalonTools
 from rdkit import Chem, DataStructs
-from rdkit.Chem import AllChem, Draw, Descriptors, rdMolDescriptors
 from rdkit.Chem.Draw import SimilarityMaps, IPythonConsole
 from chembl_webresource_client.new_client import new_client
 from rdkit import rdBase
@@ -63,7 +62,6 @@ rdBase.DisableLog('rdApp.error')
 # from tensorflow.keras import layers
 # from tensorflow.keras import initializers
 # from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping
-
 
 st.set_page_config(layout="wide")
 
