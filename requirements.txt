@@ -1,3 +1,4 @@
+libtk8.6
 chembl_webresource_client==0.10.8
 joblib==1.1.0
 numpy==1.21.6
