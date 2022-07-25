@@ -44,8 +44,8 @@ from rdkit.Chem import AllChem
 from rdkit import Chem
 from rdkit.Avalon import pyAvalonTools
 from rdkit import Chem, DataStructs
-from rdkit.Chem.Draw import rdMolDraw2D
-from rdkit.Chem.Draw import SimilarityMaps, IPythonConsole
+# from rdkit.Chem.Draw import rdMolDraw2D
+# from rdkit.Chem.Draw import SimilarityMaps, IPythonConsole
 from chembl_webresource_client.new_client import new_client
 from rdkit import rdBase
 rdBase.DisableLog('rdApp.error')
