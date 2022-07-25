@@ -38,7 +38,7 @@ import numpy as np
 
 #------------------------------------------------#
 
-from rdkit.Chem import Descriptors, Lipinski, Draw
+from rdkit.Chem import Descriptors, Lipinski
 from rdkit.ML.Descriptors import MoleculeDescriptors
 from rdkit.Chem import AllChem
 from rdkit import Chem
@@ -189,17 +189,17 @@ if selected =="Check your SMILES molecule":
                 model4 = joblib.load('active-inactive_predictor3.joblib')
                 model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
-                def draw_compound(canonical_smiles):
-                    pic = Chem.MolFromSmiles(canonical_smiles)
-                    weight = Descriptors.MolWt(pic)
-                    return Draw.MolToImage(pic)
-                picim = draw_compound(canonical_smiles)
+#                 def draw_compound(canonical_smiles):
+#                     pic = Chem.MolFromSmiles(canonical_smiles)
+#                     weight = Descriptors.MolWt(pic)
+#                     return Draw.MolToImage(pic)
+#                 picim = draw_compound(canonical_smiles)
 
                 col1, col2 = st.columns(2)
                 col1.write('')
                 col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col1.write('<p class="font-family">This is your smile molecule image</p>', unsafe_allow_html=True)
-                col1.image(picim)
+#                 col1.image(picim)
                 
                 
 
