@@ -197,9 +197,9 @@ if selected =="Check your SMILES molecule":
             else:
                 # model1 = joblib.load('pIC50_predictor.joblib')
                 # model2 = joblib.load('pIC50_predictor.joblib') 
-                model3 = joblib.load('pIC50_predictor1.joblib')
-                model4 = joblib.load('active-inactive_predictor3.joblib')
-                model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
+                #model3 = joblib.load('pIC50_predictor1.joblib')
+                #model4 = joblib.load('active-inactive_predictor3.joblib')
+                #model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
                 # mpicmole = AllChem.MolFromSmiles(canonical_smiles)
                 # AllChem.Compute2DCoords(mpicmole)
@@ -299,12 +299,12 @@ if selected =="Check your SMILES molecule":
 
 
                 # prediction1 = model3.predict(test_morgan_fps)
-                predict_pIC50 = prediction_pIC50(canonical_smiles)
-                prediction3 = ' '.join(map(str, predict_pIC50))
-                prediction4 = model4.predict(my_array)
-                prediction4_2 = ' '.join(map(str, prediction4))
-                prediction5 = model5.predict(my_array)
-                prediction5_2 = ' '.join(map(str, prediction5))
+#                 predict_pIC50 = prediction_pIC50(canonical_smiles)
+#                 prediction3 = ' '.join(map(str, predict_pIC50))
+#                 prediction4 = model4.predict(my_array)
+#                 prediction4_2 = ' '.join(map(str, prediction4))
+#                 prediction5 = model5.predict(my_array)
+#                 prediction5_2 = ' '.join(map(str, prediction5))
 
                 # st.text(f"This is predict generate new string smiles molecules : {prediction1}")
                 
