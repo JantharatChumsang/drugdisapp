@@ -189,6 +189,16 @@ if selected =="Check your SMILES molecule":
     canonical_smiles = st.text_input("1.Enter your SMILES molecules string")
 
     if st.button("Predict"):
+        def draw_compound(canonical_smiles):
+                    mpicmole = Chem.MolFromSmiles(canonical_smiles)
+                    weight = Descriptors.MolWt(mpicmole)
+                    return Draw.MolsToGridImage(mpicmole, size=(500,500))
+        col1, col2 = st.columns(2)
+        col1.write('')
+        col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
+        col1.write('<p class="font-family">This is your smile molecule image</p>', unsafe_allow_html=True)
+        col1.image(draw_compound(canonical_smiles))
+
         st.write(f"Test")
         try:
             if canonical_smiles!="" :
@@ -320,11 +330,3 @@ if selected =="Check your SMILES molecule":
                 col3.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family">predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(prediction5_2)
-        #except:
-            #st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
-        
-        
-       
-
-    
-
