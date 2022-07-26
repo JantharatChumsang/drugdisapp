@@ -38,7 +38,7 @@ import numpy as np
 
 #------------------------------------------------#
 
-from rdkit.Chem import Descriptors, Lipinski, rdqueries, rdMolDraw2D
+from rdkit.Chem import Descriptors, Lipinski, rdqueries
 from rdkit.Chem import Draw
 from rdkit.ML.Descriptors import MoleculeDescriptors
 from rdkit.Chem import AllChem
