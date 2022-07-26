@@ -307,7 +307,7 @@ if selected =="Check your SMILES molecule":
                 prediction5 = model5.predict(my_array)
                 predictionprob = model5.predict_proba(my_array)
                 prediction5_2 = ' '.join(map(str, prediction5))
-                predictionprob5 = ' '.join(map(str, predictionprob))
+                predictionprob5 = ' '.join(map(str, predictionprob[:,1]))
 
                 # st.text(f"This is predict generate new string smiles molecules : {prediction1}")
                 
