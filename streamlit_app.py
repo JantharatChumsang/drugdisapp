@@ -302,12 +302,19 @@ if selected =="Check your SMILES molecule":
                 
                 predict_pIC50 = prediction_pIC50(canonical_smiles)
                 prediction3 = ' '.join(map(str, predict_pIC50))
+                predictionprob3 = prediction_pIC50.predict_proba(my_array)
+                
                 prediction4 = model4.predict(my_array)
                 prediction4_2 = ' '.join(map(str, prediction4))
+                predictionprob4 = model4.predict_proba(my_array)
+                
                 prediction5 = model5.predict(my_array)
-                predictionprob = model5.predict_proba(my_array)
+                predictionprob5 = model5.predict_proba(my_array)
                 prediction5_2 = ' '.join(map(str, prediction5))
-                predictionprob5 = ' '.join(map(str, predictionprob[:,1]))
+                
+                predictionprob3 = ' '.join(map(str, predictionprob3[:,1]))
+                predictionprob4 = ' '.join(map(str, predictionprob4[:,1]))
+                predictionprob5 = ' '.join(map(str, predictionprob5[:,1]))
 
                 # st.text(f"This is predict generate new string smiles molecules : {prediction1}")
                 
@@ -324,15 +331,19 @@ if selected =="Check your SMILES molecule":
                 col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col1.write('<p class="font-family">Predicted your pIC50 from SMILES molecule 👇</p>', unsafe_allow_html=True)
                 col1.code(prediction3)
+                col1.write('<p class="font-family">Probability value predicted your pIC50 Drug👇</p>', unsafe_allow_html=True)
+                col1.code(predictionprob3)
                 
                 col2.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col2.write('<p class="font-family">Predicted your active/inactive Drug 👇</p>', unsafe_allow_html=True)
                 col2.code(prediction4_2)
+                col2.write('<p class="font-family">Probability value predicted your active/inactive Drug👇</p>', unsafe_allow_html=True)
+                col2.code(predictionprob4)
 
                 col3.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family">Predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(prediction5_2)
                 col3.write('<p class="font-family">Probability value predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
-                col3.code(predictionprob5,"%")
+                col3.code(predictionprob5)
         #except:
              #st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
