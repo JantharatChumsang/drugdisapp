@@ -8,6 +8,7 @@ from streamlit_lottie import st_lottie
 import codecs
 # import pickle
 import joblib
+import imblearn
 import requests
 
 #----------------------------------------------#
