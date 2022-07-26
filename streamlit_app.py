@@ -320,8 +320,8 @@ if selected =="Check your SMILES molecule":
                 col3.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family">predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(prediction5_2)
-        except:
-            st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
+        #except:
+            #st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
         
         
        
