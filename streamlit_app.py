@@ -335,4 +335,4 @@ if selected =="Check your SMILES molecule":
                 col3.write('<p class="font-family">Probability value predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(predictionprob5,"%")
         #except:
-             st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
+             #st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
