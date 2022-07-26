@@ -189,6 +189,7 @@ if selected =="Check your SMILES molecule":
     canonical_smiles = st.text_input("1.Enter your SMILES molecules string")
 
     if st.button("Predict"):
+        st.write(f"Test")
         try:
             if canonical_smiles=="" :
                 st.write(f"Don't have SMILES molecules")
