@@ -192,7 +192,7 @@ if selected =="Check your SMILES molecule":
     canonical_smiles = st.text_input("1.Enter your SMILES molecules string")
 
     if st.button("Predict"):
-        #try:
+        try:
             if canonical_smiles=="" :
                 st.write(f"Don't have SMILES molecules")
             
@@ -341,5 +341,5 @@ if selected =="Check your SMILES molecule":
                 col3.code(prediction5_2)
                 col3.write('<p class="font-family">Probability value predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(predictionprob55)
-        #except:
-             #st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
+        except:
+             st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
