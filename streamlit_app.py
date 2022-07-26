@@ -189,6 +189,7 @@ if selected =="Check your SMILES molecule":
     canonical_smiles = st.text_input("1.Enter your SMILES molecules string")
     def draw_compound(canonical_smiles):
             mpicmole = Chem.MolFromSmiles(canonical_smiles)
+            st.write(mpicmole)
             weight = Descriptors.MolWt(mpicmole)
             st.image(Draw.MolsToImage(mpicmole, size=(500,500)))
 
