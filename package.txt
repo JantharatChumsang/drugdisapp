@@ -1,2 +1,2 @@
-rdkit-pypilibxrender1
-libxrender1
+rdkit-pypilibxrender1==0.9.8
+libxrender1==0.9.8
