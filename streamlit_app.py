@@ -314,7 +314,7 @@ if selected =="Check your SMILES molecule":
                 # st.write(f"This is predict pIC50: {prediction3}")
                 # pIC50 = st.write("This is predict pIC50:", {prediction3} )
                 # actin = st.write(f"This is predict active/inactive:", {prediction4_2})
-                appnon = st.write(f"This is predict approve/non-approve:", {predictionprob5})
+                #appnon = st.write(f"This is predict approve/non-approve:", {predictionprob5})
 
                 with open('style.css') as f:
                     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
@@ -332,5 +332,6 @@ if selected =="Check your SMILES molecule":
                 col3.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family">predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(prediction5_2)
+                col3.code(predictionprob5)
         # except:
         #     st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
