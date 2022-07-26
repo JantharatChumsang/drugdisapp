@@ -79,7 +79,7 @@ selected = option_menu(
     default_index=0,
     orientation="horizontal", #แนวนอน
     styles={
-        "container": {"padding": "0!important", "background-color": "#CAF1E9"},
+        "container": {"padding": "0!important", "background-color": "#24A4AC"},
         "nav-link": {"font-size": "16px", "text-align": "center", "margin":"8px", "--hover-color": "#eee"},
         "nav-link-selected": {"background-color": "#24A4AC"},
     }
