@@ -48,7 +48,7 @@ from rdkit import Chem, DataStructs
 from rdkit.Chem.Draw import SimilarityMaps, IPythonConsole
 from rdkit.Chem.Draw import rdMolDraw2D,ShowMol
 from chembl_webresource_client.new_client import new_client
-from pikachu.general import draw_smiles
+#from pikachu.general import draw_smiles
 from rdkit import rdBase
 rdBase.DisableLog('rdApp.error')
 
