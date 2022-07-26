@@ -1,1 +1,3 @@
 libxrender==0.9.10
+rdkit-pypilibxrender1
+libxrender1
