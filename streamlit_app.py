@@ -192,9 +192,6 @@ if selected =="Check your SMILES molecule":
         st.write(f"Test")
         try:
             if canonical_smiles!="" :
-                st.write(f"Don't have SMILES molecules")
-            
-            else:
                 # model1 = joblib.load('pIC50_predictor.joblib')
                 # model2 = joblib.load('pIC50_predictor.joblib') 
                 model3 = joblib.load('pIC50_predictor1.joblib')
