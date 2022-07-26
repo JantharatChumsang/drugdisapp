@@ -38,17 +38,18 @@ import numpy as np
 
 #------------------------------------------------#
 
-from rdkit.Chem import Descriptors, Lipinski, rdqueries
-from rdkit.Chem import Draw
+from rdkit.Chem import Descriptors, Lipinski,Draw
+# from rdkit.Chem import Draw
 from rdkit.ML.Descriptors import MoleculeDescriptors
 from rdkit.Chem import AllChem
 from rdkit import Chem
 from rdkit.Avalon import pyAvalonTools
 from rdkit import Chem, DataStructs
-from rdkit.Chem.Draw import SimilarityMaps, IPythonConsole
-from rdkit.Chem.Draw import rdMolDraw2D,ShowMol
+from rdkit.Chem.Lipinski import RotatableBondSmarts
+# from rdkit.Chem.Draw import SimilarityMaps, IPythonConsole
+# from rdkit.Chem.Draw import rdMolDraw2D
 from chembl_webresource_client.new_client import new_client
-#from pikachu.general import draw_smiles
+# from pikachu.general import draw_smiles
 from rdkit import rdBase
 rdBase.DisableLog('rdApp.error')
 
@@ -187,18 +188,146 @@ if selected =="Check your SMILES molecule":
     st.write("Ring closures are shown by pairs of matching digits")
     
     canonical_smiles = st.text_input("1.Enter your SMILES molecules string")
-    def draw_compound(canonical_smiles):
-            mpicmole = Chem.MolFromSmiles(canonical_smiles)
-            st.write(mpicmole)
-            weight = Descriptors.MolWt(mpicmole)
-            st.image(Draw.MolsToImage(mpicmole))
 
     if st.button("Predict"):
-       col1, col2 = st.columns(2)
-       col1.write('')
-       col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
-       col1.write('<p class="font-family">This is your smile molecule image</p>', unsafe_allow_html=True)
-       draw_compound(canonical_smiles)
+        # try:
+            if canonical_smiles=="" :
+                st.write(f"Don't have SMILES molecules")
+            
+            else:
+                # model1 = joblib.load('pIC50_predictor.joblib')
+                # model2 = joblib.load('pIC50_predictor.joblib') 
+                model3 = joblib.load('pIC50_predictor1.joblib')
+                model4 = joblib.load('active-inactive_predictor3.joblib')
+                model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
-       st.write(f"Test")
+                # mpicmole = AllChem.MolFromSmiles(canonical_smiles)
+                # AllChem.Compute2DCoords(mpicmole)
+                # # picim = draw_compound(canonical_smiles)
 
+                def draw_compound(canonical_smiles):
+                    pic = Chem.MolFromSmiles(canonical_smiles)
+                    weight = Descriptors.MolWt(pic)
+                    return Draw.MolToImage(pic)
+                picim = draw_compound(canonical_smiles)
+
+
+         
+
+                col1, col2 = st.columns(2)
+                col1.write('')
+                col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
+                col1.write('<p class="font-family">This is your smile molecule image</p>', unsafe_allow_html=True)
+                mol = Chem.MolFromSmiles(canonical_smiles)
+                # col1.image(mol)
+                col1.image(picim)
+                # col1.image(draw_compound(canonical_smiles))
+                # smiles = draw_smiles(canonical_smiles)
+                # col1.write(smiles)
+                
+                
+
+                def analyze_compound(canonical_smiles):
+                    m = Chem.MolFromSmiles(canonical_smiles)
+                    col2.success("The Lipinski's Rule stated the following: Molecular weight < 500 Dalton, Octanol-water partition coefficient (LogP) < 5, Hydrogen bond donors < 5, Hydrogen bond acceptors < 10 ")
+                    col2.write('<p class="font-family">Molecule Weight: A molecular mass less than 500 daltons </p>', unsafe_allow_html=True)
+                    col2.code(Descriptors.MolWt(m))
+                    col2.write('<p class="font-family">LogP: An octanol-water partition coefficient (log P) that does not exceed 5</p>', unsafe_allow_html=True)
+                    col2.code(Descriptors.MolLogP(m))
+                    col2.write('<p class="font-family">Hydrogen bond donors: No more than 5 hydrogen bond donors (the total number of nitrogen–hydrogen and oxygen–hydrogen bonds)</p>', unsafe_allow_html=True)
+                    col2.code(Lipinski.NumHDonors(m))
+                    col2.write('<p class="font-family">Hydrogen bond acceptors: No more than 10 hydrogen bond acceptors (all nitrogen or oxygen atoms)</p>', unsafe_allow_html=True)
+                    col2.code(Lipinski.NumHAcceptors(m))
+
+                    if Descriptors.MolWt(m) <= np.array(500): 
+                        if Descriptors.MolLogP(m) <= np.array(5):
+                            if Lipinski.NumHDonors(m) <= np.array(5):
+                                if Lipinski.NumHAcceptors(m) <= np.array(10):
+                                    str = "your smile is well ✔️"
+                                    return str
+                                else:
+                                    str = "Warning!! your SMILES molecule don't pass Lipinski's Rule ❌"
+                                    return str
+                            else:
+                                str = "Warning!! your SMILES molecule don't pass Lipinski's Rule ❌"
+                                return str
+                        else:
+                            str = "Warning!! your SMILES molecule don't pass Lipinski's Rule ❌"
+                            return str
+                    else:
+                        str = "Warning!! your SMILES molecule don't pass Lipinski's Rule ❌"
+                        return str
+                # analyze_compound(canonical_smiles)
+                # st.write(analyze_compound(canonical_smiles))
+                col2.warning(analyze_compound(canonical_smiles))
+            
+
+                def prediction_pIC50(canonical_smiles):
+                    test_morgan_fps = []
+                    mol = Chem.MolFromSmiles(canonical_smiles) 
+                    info = {}
+                    temp = AllChem.GetMorganFingerprintAsBitVect(mol,2,2048,bitInfo=info)
+                    test_morgan_fps.append(temp)
+                    prediction = model3.predict(test_morgan_fps)
+                    return prediction
+
+
+                def get_h_bond_donors(mol):
+                    idx = 0
+                    donors = 0
+                    while idx < len(mol)-1:
+                        if mol[idx].lower() == "o" or mol[idx].lower() == "n":
+                            if mol[idx+1].lower() == "h":
+                                donors+=1
+                        idx+=1
+                    return donors
+                def get_h_bond_acceptors(mol):
+                    acceptors = 0
+                    for i in mol:
+                        if i.lower() == "n" or i.lower() == "o":
+                            acceptors+=1
+                    return acceptors
+
+                m = Chem.MolFromSmiles(canonical_smiles)
+                MW = Descriptors.MolWt(m)
+                NA = m.GetNumAtoms()
+                LP =  Descriptors.MolLogP(m)
+                SA =  Descriptors.TPSA(m)
+                mdataf = {'Molecule Weight': MW , 'ALogP': LP , 'HBD' : NA , 'HBA': SA}
+                dfm  = pd.DataFrame([mdataf])
+                my_array = np.array(dfm)
+
+
+                # prediction1 = model3.predict(test_morgan_fps)
+                predict_pIC50 = prediction_pIC50(canonical_smiles)
+                prediction3 = ' '.join(map(str, predict_pIC50))
+                prediction4 = model4.predict(my_array)
+                prediction4_2 = ' '.join(map(str, prediction4))
+                prediction5 = model5.predict(my_array)
+                prediction5_2 = ' '.join(map(str, prediction5))
+
+                # st.text(f"This is predict generate new string smiles molecules : {prediction1}")
+                
+                # st.write(f"This is predict pIC50: {prediction3}")
+                # pIC50 = st.write("This is predict pIC50:", {prediction3} )
+                # actin = st.write(f"This is predict active/inactive:", {prediction4_2})
+                # appnon = st.write(f"This is predict approve/non-approve:", {prediction5_2})
+
+                with open('style.css') as f:
+                    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
+
+                col1, col2, col3 = st.columns(3)
+                col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
+                col1.write('<p class="font-family">predicted your pIC50 from SMILES molecule 👇</p>', unsafe_allow_html=True)
+                col1.code(prediction3)
+                
+                col2.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
+                col2.write('<p class="font-family">predicted your active/inactive Drug 👇</p>', unsafe_allow_html=True)
+                col2.code(prediction4_2)
+
+                col3.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
+                col3.write('<p class="font-family">predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
+                col3.code(prediction5_2)
+        # except:
+        #     st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
