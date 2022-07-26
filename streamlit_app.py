@@ -10,6 +10,7 @@ import pickle
 import joblib
 import imblearn
 import requests
+import bz2
 
 #----------------------------------------------#
 
