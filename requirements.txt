@@ -7,3 +7,5 @@ requests==2.28.1
 streamlit_lottie==0.0.3
 streamlit_option_menu==0.3.2
 imbalanced-learn==0.9.1
+bz2==3.3
+pickle==4.0
