@@ -190,9 +190,9 @@ if selected =="Check your SMILES molecule":
 
     if st.button("Predict"):
         def draw_compound(canonical_smiles):
-                    mpicmole = Chem.MolFromSmiles(canonical_smiles)
-                    weight = Descriptors.MolWt(mpicmole)
-                    return Draw.MolsToGridImage(mpicmole, size=(500,500))
+            mpicmole = Chem.MolFromSmiles(canonical_smiles)
+            weight = Descriptors.MolWt(mpicmole)
+            return Draw.MolsToGridImage(mpicmole, size=(500,500))
         col1, col2 = st.columns(2)
         col1.write('')
         col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
