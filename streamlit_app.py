@@ -302,7 +302,7 @@ if selected =="Check your SMILES molecule":
                 
                 predict_pIC50 = prediction_pIC50(canonical_smiles)
                 prediction3 = ' '.join(map(str, predict_pIC50))
-                predictionprob3 = prediction_pIC50.predict_proba(my_array)
+                #predictionprob3 = prediction_pIC50.predict_proba(my_array)
                 
                 prediction4 = model4.predict(my_array)
                 prediction4_2 = ' '.join(map(str, prediction4))
@@ -332,7 +332,7 @@ if selected =="Check your SMILES molecule":
                 col1.write('<p class="font-family">Predicted your pIC50 from SMILES molecule 👇</p>', unsafe_allow_html=True)
                 col1.code(prediction3)
                 col1.write('<p class="font-family">Probability value predicted your pIC50 Drug👇</p>', unsafe_allow_html=True)
-                col1.code(predictionprob3)
+                #col1.code(predictionprob3)
                 
                 col2.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col2.write('<p class="font-family">Predicted your active/inactive Drug 👇</p>', unsafe_allow_html=True)
