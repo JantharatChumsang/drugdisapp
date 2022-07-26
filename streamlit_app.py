@@ -221,7 +221,7 @@ if selected =="Check your SMILES molecule":
                 col1.write('<p class="font-family">This is your smile molecule image</p>', unsafe_allow_html=True)
                 mol = Chem.MolFromSmiles(canonical_smiles)
                 # col1.image(mol)
-                col1.image(picim)
+                col1.image(picim,size = (500,500))
                 # col1.image(draw_compound(canonical_smiles))
                 # smiles = draw_smiles(canonical_smiles)
                 # col1.write(smiles)
