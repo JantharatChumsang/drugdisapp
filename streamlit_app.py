@@ -190,14 +190,14 @@ if selected =="Check your SMILES molecule":
     def draw_compound(canonical_smiles):
             mpicmole = Chem.MolFromSmiles(canonical_smiles)
             weight = Descriptors.MolWt(mpicmole)
-            return Draw.MolsToGridImage(mpicmole, size=(500,500))
+            st.image(Draw.MolsToGridImage(mpicmole, size=(500,500)))
 
     if st.button("Predict"):
        col1, col2 = st.columns(2)
        col1.write('')
        col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
        col1.write('<p class="font-family">This is your smile molecule image</p>', unsafe_allow_html=True)
-       col1.image(draw_compound(canonical_smiles))
+       draw_compound(canonical_smiles))
 
        st.write(f"Test")
 
