@@ -190,7 +190,7 @@ if selected =="Check your SMILES molecule":
     def draw_compound(canonical_smiles):
             mpicmole = Chem.MolFromSmiles(canonical_smiles)
             weight = Descriptors.MolWt(mpicmole)
-            st.image(Draw.MolsToGridImage(mpicmole, size=(500,500)))
+            st.image(Draw.MolsToImage(mpicmole, size=(500,500)))
 
     if st.button("Predict"):
        col1, col2 = st.columns(2)
