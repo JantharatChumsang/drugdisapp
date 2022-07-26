@@ -194,9 +194,9 @@ if selected =="Check your SMILES molecule":
             if canonical_smiles!="" :
                 # model1 = joblib.load('pIC50_predictor.joblib')
                 # model2 = joblib.load('pIC50_predictor.joblib') 
-                model3 = joblib.load('pIC50_predictor1.joblib')
-                model4 = joblib.load('active-inactive_predictor3.joblib')
-                model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
+                #model3 = joblib.load('pIC50_predictor1.joblib')
+                #model4 = joblib.load('active-inactive_predictor3.joblib')
+                #model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
                 # mpicmole = AllChem.MolFromSmiles(canonical_smiles)
                 # AllChem.Compute2DCoords(mpicmole)
