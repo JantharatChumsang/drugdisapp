@@ -302,7 +302,7 @@ if selected =="Check your SMILES molecule":
                 # st.text(f"This is predict generate new string smiles molecules : {prediction1}")
                 
                 # st.write(f"This is predict pIC50: {prediction3}")
-                # pIC50 = st.write("This is predict pIC50:", {prediction3} )
+                # pIC50 = st.write("This is predict pIC50:", {prediction3})
                 # actin = st.write(f"This is predict active/inactive:", {prediction4_2})
                 # appnon = st.write(f"This is predict approve/non-approve:", {prediction5_2})
 
