@@ -199,5 +199,5 @@ if selected =="Check your SMILES molecule":
        col1.write('<p class="font-family">This is your smile molecule image</p>', unsafe_allow_html=True)
        col1.image(draw_compound(canonical_smiles))
 
-        st.write(f"Test")
+       st.write(f"Test")
 
