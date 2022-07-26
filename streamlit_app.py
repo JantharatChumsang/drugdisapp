@@ -196,9 +196,11 @@ if selected =="Check your SMILES molecule":
                 st.write(f"Don't have SMILES molecules")
             
             else:
-                #model1 = joblib.load('pIC50_predictor.joblib')
-                #model2 = joblib.load('pIC50_predictor.joblib') 
-                model3 = joblib.load('pIC50_predictor1.joblib')
+                ifile = bz2.BZ2File("pIC50_predictor1.pkl",'rb')
+#                 pickled_model = pickle.load(ifile)
+#                 pickled_model.predict(test_morgan_fps)
+                
+                model3 = pickle.load(ifile)
                 model4 = joblib.load('active-inactive_predictor3.joblib')
                 model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
