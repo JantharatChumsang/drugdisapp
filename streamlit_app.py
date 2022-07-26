@@ -197,8 +197,8 @@ if selected =="Check your SMILES molecule":
             else:
                 #model1 = joblib.load('pIC50_predictor.joblib')
                 #model2 = joblib.load('pIC50_predictor.joblib') 
-                model3 = joblib.load('pIC50_predictor1.joblib')
-                model4 = joblib.load('active-inactive_predictor3.joblib')
+                #model3 = joblib.load('pIC50_predictor1.joblib')
+                #model4 = joblib.load('active-inactive_predictor3.joblib')
                 model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
                 # mpicmole = AllChem.MolFromSmiles(canonical_smiles)
@@ -298,20 +298,20 @@ if selected =="Check your SMILES molecule":
                 my_array = np.array(dfm)
 
 
-                # prediction1 = model3.predict(test_morgan_fps)
+                #prediction1 = model3.predict(test_morgan_fps)
 #                 predict_pIC50 = prediction_pIC50(canonical_smiles)
 #                 prediction3 = ' '.join(map(str, predict_pIC50))
 #                 prediction4 = model4.predict(my_array)
 #                 prediction4_2 = ' '.join(map(str, prediction4))
-#                 prediction5 = model5.predict(my_array)
-#                 prediction5_2 = ' '.join(map(str, prediction5))
+                prediction5 = model5.predict(my_array)
+                prediction5_2 = ' '.join(map(str, prediction5))
 
                 # st.text(f"This is predict generate new string smiles molecules : {prediction1}")
                 
                 # st.write(f"This is predict pIC50: {prediction3}")
                 # pIC50 = st.write("This is predict pIC50:", {prediction3} )
                 # actin = st.write(f"This is predict active/inactive:", {prediction4_2})
-                # appnon = st.write(f"This is predict approve/non-approve:", {prediction5_2})
+                appnon = st.write(f"This is predict approve/non-approve:", {prediction5_2})
 
                 with open('style.css') as f:
                     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
