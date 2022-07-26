@@ -198,7 +198,7 @@ if selected =="Check your SMILES molecule":
             else:
                 #model1 = joblib.load('pIC50_predictor.joblib')
                 #model2 = joblib.load('pIC50_predictor.joblib') 
-                model3 = joblib.load('pIC50_predictor1.joblib')
+                #model3 = joblib.load('pIC50_predictor1.joblib')
                 model4 = joblib.load('active-inactive_predictor3.joblib')
                 model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
@@ -258,8 +258,7 @@ if selected =="Check your SMILES molecule":
                     else:
                         str = "Warning!! your SMILES molecule don't pass Lipinski's Rule ❌"
                         return str
-                # analyze_compound(canonical_smiles)
-                # st.write(analyze_compound(canonical_smiles))
+               
                 col2.warning(analyze_compound(canonical_smiles))
             
 
@@ -300,8 +299,8 @@ if selected =="Check your SMILES molecule":
 
 
                 
-                predict_pIC50 = prediction_pIC50(canonical_smiles)
-                prediction3 = ' '.join(map(str, predict_pIC50))
+                #predict_pIC50 = prediction_pIC50(canonical_smiles)
+                #prediction3 = ' '.join(map(str, predict_pIC50))
                 #predictionprob3 = prediction_pIC50.predict_proba(my_array)
                 
                 prediction4 = model4.predict(my_array)
@@ -312,16 +311,10 @@ if selected =="Check your SMILES molecule":
                 predictionprob5 = model5.predict_proba(my_array)
                 prediction5_2 = ' '.join(map(str, prediction5))
                 
-                predictionprob3 = ' '.join(map(str, predictionprob3[:,1]))
+                #predictionprob3 = ' '.join(map(str, predictionprob3[:,1]))
                 predictionprob44 = ' '.join(map(str, predictionprob4[:,1]))
                 predictionprob55 = ' '.join(map(str, predictionprob5[:,1]))
 
-                # st.text(f"This is predict generate new string smiles molecules : {prediction1}")
-                
-                # st.write(f"This is predict pIC50: {prediction3}")
-                # pIC50 = st.write("This is predict pIC50:", {prediction3} )
-                # actin = st.write(f"This is predict active/inactive:", {prediction4_2})
-                #appnon = st.write(f"This is predict approve/non-approve:", {predictionprob5})
 
                 with open('style.css') as f:
                     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
@@ -330,7 +323,7 @@ if selected =="Check your SMILES molecule":
                 col1, col2, col3 = st.columns(3)
                 col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col1.write('<p class="font-family">Predicted your pIC50 from SMILES molecule 👇</p>', unsafe_allow_html=True)
-                col1.code(prediction3)
+                #col1.code(prediction3)
                 col1.write('<p class="font-family">Probability value predicted your pIC50 Drug👇</p>', unsafe_allow_html=True)
                 #col1.code(predictionprob3)
                 
