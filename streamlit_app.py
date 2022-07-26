@@ -313,8 +313,8 @@ if selected =="Check your SMILES molecule":
                 prediction5_2 = ' '.join(map(str, prediction5))
                 
                 predictionprob3 = ' '.join(map(str, predictionprob3[:,1]))
-                predictionprob4 = ' '.join(map(str, predictionprob4[:,1]))
-                predictionprob5 = ' '.join(map(str, predictionprob5[:,1]))
+                predictionprob44 = ' '.join(map(str, predictionprob4[:,1]))
+                predictionprob55 = ' '.join(map(str, predictionprob5[:,1]))
 
                 # st.text(f"This is predict generate new string smiles molecules : {prediction1}")
                 
@@ -338,12 +338,12 @@ if selected =="Check your SMILES molecule":
                 col2.write('<p class="font-family">Predicted your active/inactive Drug 👇</p>', unsafe_allow_html=True)
                 col2.code(prediction4_2)
                 col2.write('<p class="font-family">Probability value predicted your active/inactive Drug👇</p>', unsafe_allow_html=True)
-                col2.code(predictionprob4)
+                col2.code(predictionprob44)
 
                 col3.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family">Predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(prediction5_2)
                 col3.write('<p class="font-family">Probability value predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
-                col3.code(predictionprob5)
+                col3.code(predictionprob55)
         #except:
              #st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
