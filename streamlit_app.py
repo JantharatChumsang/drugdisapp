@@ -6,7 +6,7 @@ from streamlit_option_menu import option_menu
 from streamlit_lottie import st_lottie
 
 import codecs
-import pickle5
+import pickle5 as pickle
 import joblib
 import imblearn
 import requests
