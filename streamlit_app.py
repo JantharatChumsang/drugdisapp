@@ -38,7 +38,8 @@ import numpy as np
 
 #------------------------------------------------#
 
-from rdkit.Chem import Descriptors, Lipinski, Draw, rdqueries, rdMolDraw2D
+from rdkit.Chem import Descriptors, Lipinski, rdqueries, rdMolDraw2D
+from rdkit.Chem import Draw
 from rdkit.ML.Descriptors import MoleculeDescriptors
 from rdkit.Chem import AllChem
 from rdkit import Chem
@@ -205,8 +206,8 @@ if selected =="Check your SMILES molecule":
 
                 def draw_compound(canonical_smiles):
                     mpicmole = Chem.MolFromSmiles(canonical_smiles)
-                    weight = Descriptors.MolWt(mpicmole)
-                    return Draw.MolToImage(mpicmole, size=(500,500))
+                    # weight = Descriptors.MolWt(mpicmole)
+                    return Draw.MolsToGridImage(mpicmole, size=(500,500))
 
 
                 col1, col2 = st.columns(2)
