@@ -191,15 +191,15 @@ if selected =="Check your SMILES molecule":
     canonical_smiles = st.text_input("1.Enter your SMILES molecules string")
 
     if st.button("Predict"):
-        # try:
+        try:
             if canonical_smiles=="" :
                 st.write(f"Don't have SMILES molecules")
             
             else:
                 #model1 = joblib.load('pIC50_predictor.joblib')
                 #model2 = joblib.load('pIC50_predictor.joblib') 
-                #model3 = joblib.load('pIC50_predictor1.joblib')
-                #model4 = joblib.load('active-inactive_predictor3.joblib')
+                model3 = joblib.load('pIC50_predictor1.joblib')
+                model4 = joblib.load('active-inactive_predictor3.joblib')
                 model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
                 # mpicmole = AllChem.MolFromSmiles(canonical_smiles)
@@ -299,11 +299,11 @@ if selected =="Check your SMILES molecule":
                 my_array = np.array(dfm)
 
 
-                #prediction1 = model3.predict(test_morgan_fps)
-#                 predict_pIC50 = prediction_pIC50(canonical_smiles)
-#                 prediction3 = ' '.join(map(str, predict_pIC50))
-#                 prediction4 = model4.predict(my_array)
-#                 prediction4_2 = ' '.join(map(str, prediction4))
+                prediction1 = model3.predict(test_morgan_fps)
+                predict_pIC50 = prediction_pIC50(canonical_smiles)
+                prediction3 = ' '.join(map(str, predict_pIC50))
+                prediction4 = model4.predict(my_array)
+                prediction4_2 = ' '.join(map(str, prediction4))
                 prediction5 = model5.predict(my_array)
                 predictionprob = model5.predict_proba(my_array)
                 prediction5_2 = ' '.join(map(str, prediction5))
@@ -323,16 +323,16 @@ if selected =="Check your SMILES molecule":
                 col1, col2, col3 = st.columns(3)
                 col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col1.write('<p class="font-family">Predicted your pIC50 from SMILES molecule 👇</p>', unsafe_allow_html=True)
-                #col1.code(prediction3)
+                col1.code(prediction3)
                 
                 col2.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col2.write('<p class="font-family">Predicted your active/inactive Drug 👇</p>', unsafe_allow_html=True)
-                #col2.code(prediction4_2)
+                col2.code(prediction4_2)
 
                 col3.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family">Predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(prediction5_2)
                 col3.write('<p class="font-family">Probability value predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
                 col3.code(predictionprob5,"%")
-        # except:
-        #     st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
+        except:
+             st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
