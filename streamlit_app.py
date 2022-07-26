@@ -299,7 +299,7 @@ if selected =="Check your SMILES molecule":
                 my_array = np.array(dfm)
 
 
-                prediction1 = model3.predict(test_morgan_fps)
+                
                 predict_pIC50 = prediction_pIC50(canonical_smiles)
                 prediction3 = ' '.join(map(str, predict_pIC50))
                 prediction4 = model4.predict(my_array)
