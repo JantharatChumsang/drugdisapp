@@ -38,15 +38,16 @@ import numpy as np
 
 #------------------------------------------------#
 
-from rdkit.Chem import Descriptors, Lipinski
+from rdkit.Chem import Descriptors, Lipinski, Draw, rdqueries
 from rdkit.ML.Descriptors import MoleculeDescriptors
 from rdkit.Chem import AllChem
 from rdkit import Chem
 from rdkit.Avalon import pyAvalonTools
 from rdkit import Chem, DataStructs
-from rdkit.Chem.Draw import rdMolDraw2D
 # from rdkit.Chem.Draw import SimilarityMaps, IPythonConsole
+# from rdkit.Chem.Draw import rdMolDraw2D
 from chembl_webresource_client.new_client import new_client
+# from pikachu.general import draw_smiles
 from rdkit import rdBase
 rdBase.DisableLog('rdApp.error')
 
@@ -174,7 +175,16 @@ if selected =="Predict new SMILES molecule":
 
 if selected =="Check your SMILES molecule":
     st.title(f"Check your SMILES molecule")
+    st.write(""" SMILES = Simplified Molecular Input Line Entry Specification """)
     st.write("The Lipinski's Rule stated the following: Molecular weight < 500 Dalton, Octanol-water partition coefficient (LogP) < 5, Hydrogen bond donors < 5, Hydrogen bond acceptors < 10 ")
+    st.write("Atoms are shown by atomic symbols")
+    st.write("Hydrogen atoms are assumed to fill spare valencies")
+    st.write("Adjacent atoms are connected by single bonds")
+    st.write("""double bonds are shown by "=" """)
+    st.write("""triple bonds are shown by "#" """)
+    st.write("Branching is indicated by parenthesis")
+    st.write("Ring closures are shown by pairs of matching digits")
+    
     canonical_smiles = st.text_input("1.Enter your SMILES molecules string")
 
     if st.button("Predict"):
@@ -189,30 +199,36 @@ if selected =="Check your SMILES molecule":
                 model4 = joblib.load('active-inactive_predictor3.joblib')
                 model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
+                # mpicmole = AllChem.MolFromSmiles(canonical_smiles)
+                # AllChem.Compute2DCoords(mpicmole)
+                # # picim = draw_compound(canonical_smiles)
+
                 def draw_compound(canonical_smiles):
-                    pic = Chem.MolFromSmiles(canonical_smiles)
-                    weight = Descriptors.MolWt(pic)
-                    return Draw.MolToImage(pic)
-                picim = draw_compound(canonical_smiles)
+                    mpicmole = Chem.MolFromSmiles(canonical_smiles)
+                    weight = Descriptors.MolWt(mpicmole)
+                    return Draw.MolToImage(mpicmole, size=(500,500))
+
 
                 col1, col2 = st.columns(2)
                 col1.write('')
                 col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col1.write('<p class="font-family">This is your smile molecule image</p>', unsafe_allow_html=True)
-#                 col1.image(picim)
+                col1.image(draw_compound(canonical_smiles))
+                # smiles = draw_smiles(canonical_smiles)
+                # col1.write(smiles)
                 
                 
 
                 def analyze_compound(canonical_smiles):
                     m = Chem.MolFromSmiles(canonical_smiles)
                     col2.success("The Lipinski's Rule stated the following: Molecular weight < 500 Dalton, Octanol-water partition coefficient (LogP) < 5, Hydrogen bond donors < 5, Hydrogen bond acceptors < 10 ")
-                    col2.write('<p class="font-family">Molecule Weight:</p>', unsafe_allow_html=True)
+                    col2.write('<p class="font-family">Molecule Weight: A molecular mass less than 500 daltons </p>', unsafe_allow_html=True)
                     col2.code(Descriptors.MolWt(m))
-                    col2.write('<p class="font-family">LogP: </p>', unsafe_allow_html=True)
+                    col2.write('<p class="font-family">LogP: An octanol-water partition coefficient (log P) that does not exceed 5</p>', unsafe_allow_html=True)
                     col2.code(Descriptors.MolLogP(m))
-                    col2.write('<p class="font-family">Hydrogen bond donors: </p>', unsafe_allow_html=True)
+                    col2.write('<p class="font-family">Hydrogen bond donors: No more than 5 hydrogen bond donors (the total number of nitrogen–hydrogen and oxygen–hydrogen bonds)</p>', unsafe_allow_html=True)
                     col2.code(Lipinski.NumHDonors(m))
-                    col2.write('<p class="font-family">Hydrogen bond acceptors:</p>', unsafe_allow_html=True)
+                    col2.write('<p class="font-family">Hydrogen bond acceptors: No more than 10 hydrogen bond acceptors (all nitrogen or oxygen atoms)</p>', unsafe_allow_html=True)
                     col2.code(Lipinski.NumHAcceptors(m))
 
                     if Descriptors.MolWt(m) <= np.array(500): 
