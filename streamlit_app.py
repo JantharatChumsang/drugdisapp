@@ -305,6 +305,7 @@ if selected =="Check your SMILES molecule":
 #                 prediction4 = model4.predict(my_array)
 #                 prediction4_2 = ' '.join(map(str, prediction4))
                 prediction5 = model5.predict(my_array)
+                predictionprob = model5.predict_proba(my_array)
                 prediction5_2 = ' '.join(map(str, prediction5))
 
                 # st.text(f"This is predict generate new string smiles molecules : {prediction1}")
@@ -312,7 +313,7 @@ if selected =="Check your SMILES molecule":
                 # st.write(f"This is predict pIC50: {prediction3}")
                 # pIC50 = st.write("This is predict pIC50:", {prediction3} )
                 # actin = st.write(f"This is predict active/inactive:", {prediction4_2})
-                #appnon = st.write(f"This is predict approve/non-approve:", {prediction5_2})
+                appnon = st.write(f"This is predict approve/non-approve:", {predictionprob})
 
                 with open('style.css') as f:
                     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
