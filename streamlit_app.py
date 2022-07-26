@@ -191,7 +191,7 @@ if selected =="Check your SMILES molecule":
             mpicmole = Chem.MolFromSmiles(canonical_smiles)
             st.write(mpicmole)
             weight = Descriptors.MolWt(mpicmole)
-            st.image(Draw.MolsToImage(mpicmole, size=(500,500)))
+            st.write(Draw.ShowMol(mpicmole))
 
     if st.button("Predict"):
        col1, col2 = st.columns(2)
