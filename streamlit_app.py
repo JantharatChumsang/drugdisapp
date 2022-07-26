@@ -309,6 +309,7 @@ if selected =="Check your SMILES molecule":
                 prediction4 = model4.predict(my_array)
                 prediction4_2 = ' '.join(map(str, prediction4))
                 predictionprob4 = model4.predict_proba(my_array)
+                st.write(predictionprob4)
                 
                 prediction5 = model5.predict(my_array)
                 predictionprob5 = model5.predict_proba(my_array)
