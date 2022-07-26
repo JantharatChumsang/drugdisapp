@@ -321,11 +321,11 @@ if selected =="Check your SMILES molecule":
                 col1, col2, col3 = st.columns(3)
                 col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col1.write('<p class="font-family">predicted your pIC50 from SMILES molecule 👇</p>', unsafe_allow_html=True)
-                col1.code(prediction3)
+                #col1.code(prediction3)
                 
                 col2.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col2.write('<p class="font-family">predicted your active/inactive Drug 👇</p>', unsafe_allow_html=True)
-                col2.code(prediction4_2)
+                #col2.code(prediction4_2)
 
                 col3.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col3.write('<p class="font-family">predicted your approve/non-approve Drug👇</p>', unsafe_allow_html=True)
