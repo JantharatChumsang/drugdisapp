@@ -198,7 +198,7 @@ if selected =="Check your SMILES molecule":
             else:
                 #model1 = joblib.load('pIC50_predictor.joblib')
                 #model2 = joblib.load('pIC50_predictor.joblib') 
-                #model3 = joblib.load('pIC50_predictor1.joblib')
+                model3 = joblib.load('pIC50_predictor1.joblib')
                 model4 = joblib.load('active-inactive_predictor3.joblib')
                 model5 = joblib.load('BalancedRandomForestClassifier_model6.joblib')
 
@@ -299,8 +299,8 @@ if selected =="Check your SMILES molecule":
 
 
                 
-                #predict_pIC50 = prediction_pIC50(canonical_smiles)
-                #prediction3 = ' '.join(map(str, predict_pIC50))
+                predict_pIC50 = prediction_pIC50(canonical_smiles)
+                prediction3 = ' '.join(map(str, predict_pIC50))
                 #predictionprob3 = prediction_pIC50.predict_proba(my_array)
                 
                 prediction4 = model4.predict(my_array)
@@ -323,7 +323,7 @@ if selected =="Check your SMILES molecule":
                 col1, col2, col3 = st.columns(3)
                 col1.write("""<style>.font-family {font-size:15px !important;}</style>""", unsafe_allow_html=True)
                 col1.write('<p class="font-family">Predicted your pIC50 from SMILES molecule 👇</p>', unsafe_allow_html=True)
-                #col1.code(prediction3)
+                col1.code(prediction3)
                 col1.write('<p class="font-family">Probability value predicted your pIC50 Drug👇</p>', unsafe_allow_html=True)
                 #col1.code(predictionprob3)
                 
