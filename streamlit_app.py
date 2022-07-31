@@ -408,7 +408,7 @@ rdBase.DisableLog('rdApp.error')
 # import zipfile
 # import glob
 # import random
-import keras
+# import keras
 from keras.utils import np_utils
 from keras.models import load_model
 
