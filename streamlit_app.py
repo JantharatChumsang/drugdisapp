@@ -101,7 +101,7 @@ if selected =="Home":
 
 #     lottie_coding = load_lottieurl("https://assets7.lottiefiles.com/packages/lf20_nw19osms.json")
 #     st_lottie(lottie_coding, height=450, key="coding")
-      with st.expander("Dataset"):
+    with st.expander("Dataset"):
         df1 = pd.read_csv("databi.csv")
         st.write(df1)
             
