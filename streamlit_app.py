@@ -106,7 +106,7 @@ if selected =="Home":
         st.write(df1)
             
 #     with st.expander("Power BI"):
-      t1,t2 = st.columns((0.15,1))
+      t1,t2 = st.columns((0.15,1)):
       t1.image('images/qrcode_app.powerbi.com.png', width = 175)
       st_webpage('powerBI.html')
 #-------------------------------------------------------#
