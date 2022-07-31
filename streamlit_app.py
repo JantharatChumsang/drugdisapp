@@ -99,9 +99,16 @@ if selected =="Home":
     # ---- LOAD ASSETS ----
     st.write("##")
 
-    lottie_coding = load_lottieurl("https://assets7.lottiefiles.com/packages/lf20_nw19osms.json")
-    st_lottie(lottie_coding, height=450, key="coding")
-      
+#     lottie_coding = load_lottieurl("https://assets7.lottiefiles.com/packages/lf20_nw19osms.json")
+#     st_lottie(lottie_coding, height=450, key="coding")
+      with st.expander("Dataset"):
+        df1 = pd.read_csv("databi.csv")
+        st.write(df1)
+            
+#     with st.expander("Power BI"):
+      t1,t2 = st.columns((0.15,1))
+      t1.image('images/qrcode_app.powerbi.com.png', width = 175)
+      st_webpage('powerBI.html')
 #-------------------------------------------------------#
 if selected =="About us":
     with st.container():
@@ -208,17 +215,7 @@ if selected =="About us":
 if selected =="Check your SMILES molecule":
     st.title(f"Check your SMILES molecule")
     st.write(""" SMILES = Simplified Molecular Input Line Entry Specification """)
-    with st.expander("Dataset"):
-        df1 = pd.read_csv("databi.csv")
-        st.write(df1)
-            
-
-    with st.expander("Power BI"):
-        t1,t2 = st.columns((0.15,1))
-        t1.image('images/qrcode_app.powerbi.com.png', width = 175)
-        st_webpage('powerBI.html')
-        # t2.markdown('https://app.powerbi.com/view?r=eyJrIjoiNWRjZjE1NzYtZThjNi00NzUyLWFiMjUtMTU1ZDBmMjFlYTgyIiwidCI6IjZmNDQzMmRjLTIwZDItNDQxZC1iMWRiLWFjMzM4MGJhNjMzZCIsImMiOjEwfQ%3D%3D&pageName=ReportSection8e76dac0e5f9875f5845',unsafe_allow_html=True)
-
+       
     canonical_smiles = st.text_input("1.Enter your SMILES molecules string")  
 
     if st.button("Predict"):
