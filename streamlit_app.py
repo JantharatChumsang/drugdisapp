@@ -1,9 +1,13 @@
+# from email.policy import default
+# from tkinter import CENTER
+# import Tkinter as tk
 import streamlit as st 
 from streamlit_option_menu import option_menu
 from streamlit_lottie import st_lottie
 import streamlit.components.v1 as stc
 
 import codecs
+# import pickle
 import joblib
 import imblearn
 import requests
@@ -14,6 +18,27 @@ import random
 import json
 import pandas as pd
 import numpy as np
+
+# import seaborn as sn
+# import matplotlib.pyplot as plt
+# from statistics import mean, stdev
+
+#----------------------------------------------#
+# import sklearn
+# from sklearn import preprocessing
+# from sklearn.model_selection import StratifiedKFold
+# from sklearn import linear_model
+# from sklearn.model_selection import train_test_split
+# from sklearn.datasets import make_classification
+# from sklearn.metrics import f1_score,accuracy_score
+# from sklearn.metrics import plot_confusion_matrix
+# from sklearn.metrics import balanced_accuracy_score
+# from imblearn.ensemble import BalancedRandomForestClassifier
+# from sklearn.pipeline import Pipeline
+# from sklearn.impute import SimpleImputer
+# from sklearn.ensemble import RandomForestRegressor
+# from sklearn.metrics import r2_score,mean_absolute_error, mean_squared_error
+# from sklearn.preprocessing import StandardScaler
 
 #------------------------------------------------#
 
@@ -99,16 +124,18 @@ if selected =="Home":
     # ---- LOAD ASSETS ----
     st.write("##")
 
-#     lottie_coding = load_lottieurl("https://assets7.lottiefiles.com/packages/lf20_nw19osms.json")
-#     st_lottie(lottie_coding, height=450, key="coding")
+    # lottie_coding = load_lottieurl("https://assets7.lottiefiles.com/packages/lf20_nw19osms.json")
+    # st_lottie(lottie_coding, height=450, key="coding")
     with st.expander("Dataset"):
         df1 = pd.read_csv("databi.csv")
         st.write(df1)
             
-#     with st.expander("Power BI"):
-#     t1,t2 = st.columns((0.15,1))
-#     t1.image('images/qrcode_app.powerbi.com.png', width = 175)
+
+    # with st.expander("Power BI"):
+    # t1,t2 = st.columns((0.15,1))
+    # t1.image('images/qrcode_app.powerbi.com.png', width = 175)
     st_webpage('powerBI.html')
+      
 #-------------------------------------------------------#
 if selected =="About us":
     with st.container():
@@ -215,6 +242,7 @@ if selected =="About us":
 if selected =="Check your SMILES molecule":
     st.title(f"Check your SMILES molecule")
     st.write(""" SMILES = Simplified Molecular Input Line Entry Specification """)
+    
        
     canonical_smiles = st.text_input("1.Enter your SMILES molecules string")  
 
@@ -367,20 +395,7 @@ if selected =="Predict new SMILES molecule":
                 st.write(f"Don't have SMILES molecules")
             
             else:
-                # model = joblib.load('pIC50_predictor1.joblib')
-                # df = pd.read_csv("pharmaceuticAI_all_compounds.smiles")
-                # st.write(df)
-                # from tensorflow.python.framework.config import set_memory_growth
-
-                # tf.compat.v1.disable_v2_behavior()
-                # gpus = tf.config.experimental.list_physical_devices('GPU')
-                # if gpus:
-                #     try:
-                #         for gpu in gpus:
-                #             tf.config.experimental.set_memory_growth(gpu, True)
-                #     except RuntimeError as e:
-                #         print(e)
-
+                df = pd.read_csv("pharmaceuticAI_all_compounds.smiles")
                 model = load_model('final_mo.h5')
                 original = predict_nsmiles
 
@@ -397,14 +412,9 @@ if selected =="Predict new SMILES molecule":
 
                 filey = open('pharmaceuticAI_all_compounds.smiles')
                 structures = [line[:-1] for line in filey]
-                #("Num Total Samples:", len(structures))
-                #filey.close()
-                # num_sampled = structures
-
-                # random.shuffle(structures)
+                
                 data = structures 
                 del structures
-                #("Num Sampled:", num_sampled)
 
                 def gen_structs(data):
 
@@ -436,6 +446,11 @@ if selected =="Predict new SMILES molecule":
                         network_inp.append([element_to_int[char] for char in sequence_in])
                         
                     n_patterns = len(network_inp)
+
+                    # reshape the input into a format compatible with CuDNNLSTM layers
+                    network_inp = np.reshape(network_inp, (n_patterns, sequence_length))
+
+                    return network_inp
 
                 network_input = gen_data(gen_structs(data))
 
@@ -579,8 +594,10 @@ if selected =="Predict new SMILES molecule":
                 #encoder.save('final_model.h5')
                 # model.load_weights("SMILES-best(2).hdf5")
                 
-                augmented = aug_list([original])[0]
-                st.write(augmented)
+                original = str(predict_nsmiles)
+                augmented = aug_list([original])
+                st.write(original) 
+                st.write(augmented) 
                             
         # except:
         #      st.error(f"Your SMILES does not meet the principles of the Lipinski Rules!! ❌")
