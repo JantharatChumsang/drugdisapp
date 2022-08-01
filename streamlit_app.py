@@ -87,7 +87,7 @@ def load_lottieurl(url: str):
 
 #### import html ####
 import streamlit.components.v1 as stc 
-def st_webpage(page_html,width=1370,height=900):
+def st_webpage(page_html,width=1370,height=1500):
     page_file = codecs.open(page_html,'r')
     page =page_file.read()
     stc.html(page,width=width, height=height , scrolling = False)
